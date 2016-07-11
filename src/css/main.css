@@ -1,0 +1,44 @@
+/**/
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+svg {
+    background-color: #f0f0f0;
+}
+
+line {
+    stroke: #999;
+}
+
+text {
+    font-size: 0.7em;
+}
+
+.flagContainer {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.flag {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    font-size: 1em;
+    background: black;
+    border: 0px;
+    pointer-events: none;
+    color: white;
+}
