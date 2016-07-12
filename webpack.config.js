@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   bail: false,
   output: {
     filename: 'bundle.js'

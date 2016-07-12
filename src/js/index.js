@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
 
-import Visualization from './CountryBorders';
+import Visualization from './GlobeMap';
 import config from './config';
 
 
