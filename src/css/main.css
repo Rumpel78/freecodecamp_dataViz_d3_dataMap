@@ -18,7 +18,7 @@ text {
     font-size: 0.7em;
 }
 
-.flagContainer {
+#map {
     position: absolute;
     right: 0px;
     left: 0px;
