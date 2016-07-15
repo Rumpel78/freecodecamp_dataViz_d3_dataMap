@@ -13,7 +13,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
         query: {
-          presets: ['es2015']
+          presets: ['es2015'],
+          compact: true
         }
       }
     ],
@@ -23,7 +24,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-        d3: 'd3'
+      d3: 'd3'
     })
- ],
+  ],
 };

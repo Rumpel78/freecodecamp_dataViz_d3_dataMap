@@ -32,6 +32,7 @@ gulp.task('watch', function() {
   gulp.watch('src/css/**/*', ['build:css']);
   gulp.watch('src/*.html', ['build:html:dev']);
   gulp.watch('src/datasets/*', ['move:datasets']);
+  gulp.watch('src/assets/**/*', ['move:assets']);
   gulp.watch('src/fonts/*', ['move:fonts']);
 });
 
@@ -100,7 +101,7 @@ gulp.task('move:fonts', function() {
 
 // Assets
 gulp.task('move:assets', function() {
-  return gulp.src('./src/assets/*')
+  return gulp.src('./src/assets/**/*')
   .pipe(gulp.dest('./build/assets'))
   .pipe(reload({stream:true}));
 });

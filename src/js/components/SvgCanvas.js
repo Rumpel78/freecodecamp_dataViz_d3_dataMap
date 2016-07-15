@@ -52,10 +52,10 @@ export default class SvgCanvas {
     const minY = d3.min(dataY);
     const maxY = d3.max(dataY);
 
-    this.scaleX = d3.scale.linear()
+    this.scaleX = d3.scaleLinear()
                     .domain([minX, maxX])
                     .range([0, this.drawingArea.width]);
-    this.scaleY = d3.scale.linear()
+    this.scaleY = d3.scaleLinear()
                     .domain([minY, maxY])
                     .range([0, this.drawingArea.height]);
     return data;
@@ -64,7 +64,7 @@ export default class SvgCanvas {
     items.remove();
   }
   itemsEnter(items) {
-    items.append('g')
+    return items.append('g')
            .attr('class', 'dataItem')
            .on('mouseover', d => this.onMouseOver(d))
            .on('mouseout', () => this.onMouseOut());
@@ -72,10 +72,9 @@ export default class SvgCanvas {
   itemsUpdate(items) { }
   createXaxis(parentElement) {
     // Create x axis
-    this.axisX = d3.svg.axis()
+    this.axisX = d3.axisBottom()
                     .scale(this.scaleX)
-                    .ticks(20)
-                    .orient('bottom');
+                    .ticks(20);
     // Draw x axis
     parentElement.append('g')
             .attr('class', 'x axis')
@@ -84,10 +83,9 @@ export default class SvgCanvas {
   }
   createYaxis(parentElement) {
      // Create y axis
-    this.axisY = d3.svg.axis()
+    this.axisY = d3.axisLeft()
                     .scale(this.scaleY)
-                    .ticks(20)
-                    .orient('left');
+                    .ticks(20);
     // Draw y axis
     parentElement.append('g')
             .attr('class', 'y axis')

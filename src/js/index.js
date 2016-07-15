@@ -5,7 +5,7 @@ import config from './config';
 
 
 const visualization = new Visualization('.plot', config, v => {
-  d3.select('.flagContainer')
+  d3.select('#map')
     .style('width', `${config.canvasWidth}px`)
     .style('height', `${config.canvasHeight}px`);
   v.getData(config.dataUrl, (err, data) => {
