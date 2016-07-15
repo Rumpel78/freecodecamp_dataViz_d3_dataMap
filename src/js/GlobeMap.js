@@ -15,28 +15,22 @@ export default class GlobeMap extends CoordinateMaping {
           .attr('height', this.drawingArea.height)
           .attr('xlink:href', '../assets/worldHigh.svg');
     this.svg.call(zoom);
-    this.projection = d3.geoMercator().translate([this.width/2, this.height/2]);
-    console.log(this.projection);
+
+	// projection="mercator" 
+  // leftLongitude="-169.110266" 
+  // rightLongitude="190.480712" 
+  // topLatitude="83.63001" 
+  // bottomLatitude="-58.488473"
+
+    this.projection = d3.geoMercator()
+              .translate([this.width/2, this.height/2]);
   }
   postprocessData(data) {
     // Expecting data in form of array [latitude , longitude]
-    data = [[0,0], [47.3655056,9.68726]];
-
-    const minX = -169.110266;
-    const maxX = 190.480712;
-
-    const minY = 83.63001;
-    const maxY = -58.488473;
+    data = [[0,0], [9.68726, 47.3655056]];
 
     data = data.map(d => this.projection(d));
-    console.log(data);
 
-    this.scaleX = d3.scaleLinear()
-                    .domain([minX, maxX])
-                    .range([0, this.drawingArea.width]);
-    this.scaleY = d3.scaleLinear()
-                    .domain([minY, maxY])
-                    .range([0, this.drawingArea.height]);
     return data;
   }
   drawGraph() {
