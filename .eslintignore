@@ -1,5 +1,0 @@
-webpack.config.js
-gulpfile.js
-.eslintrc
-build/**/*.js
-node_modules
