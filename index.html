@@ -1,115 +1,25 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 
-<style>
-    .country {
-        fill: #aaa;
-        stroke: #fff;
-        stroke-width: 0.2px;
-    }
+<head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    .meteor {
-        fill: red;
-        opacity: .5;
-    }
-
-    .meteor:hover {
-        fill: red;
-        opacity: 1;
-    }
-
-    div.tooltip {
-        position: absolute;
-        text-align: center;
-        width: 160px;
-        height: 28px;
-        padding: 2px;
-        font: 12px sans-serif;
-        background: lightsteelblue;
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+</head>
 
 <body>
-    <h1>Meteorite strikes</h1>
-    <div id="worldMap">
+    <div class="container">
+        <h1>Meteorite Strikes</h1>
+        <div id="worldMap"></div>
     </div>
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
-    <script>
-        // Prepare path projection, width and height
-        var path = d3.geoPath(d3.geoMercator()),
-            width = 960,
-            height = 500;
-
-        // Create main svg element
-        var svg = d3.select("#worldMap").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-        var content = svg.append("g");
-
-        // Create zoom behavior
-        var zoom = d3.zoom()
-            .scaleExtent([1, 10])
-            .translateExtent([
-                [-100, -100],
-                [width + 90, height + 100]
-            ])
-            .on("zoom", () => {
-                content.attr("transform", d3.event.transform);
-            });
-        svg.call(zoom);
-
-        // Create tooltip
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        // draw world map
-        d3.json("./world-110m.json", function (error, world) {
-            if (error) throw error;
-
-            var geojson = topojson.feature(world, world.objects.countries)
-            content.selectAll("path")
-                .data(geojson.features)
-                .enter().append("path")
-                .attr("d", path)
-                .attr("class", "country")
-
-        });
-
-        // draw meteorites
-        d3.json("./meteorite-strike-data.json", function (error, meteorite) {
-            if (error) throw error;
-
-            var scale = d3.scaleSqrt().domain([0, 1000000]).range([2, 7]);
-            var circlePath = path.pointRadius(m => scale(m.properties.mass))
-            content.selectAll("path")
-                .data(meteorite.features)
-                .enter().append("path")
-                .attr("d", circlePath)
-                .attr("class", "meteor")
-                .on("mouseover", d => {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html("Name: " + d.properties.name + "<br />" +
-                            "Year: " + d.properties.year.substring(0, 4) + "<br />")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function (d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
-        });
-
-        function zoomed() {}
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>
